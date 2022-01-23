@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %} TODO App - Login {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-6" style="float:none;margin:auto;">
+        <form method="post" action="{% url 'login_validate' %}">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label> <b>{{ field.label }}</b> </label>
+                {{ field }}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

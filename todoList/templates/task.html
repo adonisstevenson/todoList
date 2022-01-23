@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %} TODO App - New task {% endblock %}
+
+{% block content %}
+
+{% include 'partial/_task.html' with task=task view_only=True no_done_box=True%}
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %} TODO App - Index {% endblock %}
+
+{% block content %}
+
+<h1>Active tasks</h1>
+
+{% if tasks %}
+    <div class="row">
+    {% for task in tasks %}
+    {% if task.task_status == False %}
+        <div class="col-lg-6 col-md-12 task-container">
+            {% include 'partial/_task.html' with task=task %}
+            <div class="modal fade" id="doneModal-{{ task.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are You sure to mark task <i>{{ task.task_title }}</i> as done?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <a type="button" class="btn btn-primary" href="task/{{task.id}}/done">Yes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+    <br><br>
+    <h1>Done tasks</h1>
+    <div class="row">
+        {% for task in tasks %}
+        {% if task.task_status != False %}
+            <div class="col-lg-6 col-md-12 task-container">
+                {% include 'partial/_task.html' with task=task no_done_box=True %}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    </div>
+
+{% endif %}
+
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+<div class="card task-card">
+    <div class="card-header">
+        <b> {{ task.task_title }} </b>
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{ task.task_text }}</p>
+        <small><i>Deadline: {{ task.task_date }}</i></small>
+        <br>
+        <br>
+        <br>
+        <div class="option-box">
+            {% if no_done_box == None %}
+            <div class="form-check">
+                <input class="form-check-input done-checkbox" type="checkbox" value="" id="{{ task.id }}" data-toggle="modal" data-target="#doneModal-{{ task.id }}">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Mark as done
+                </label>
+            </div>
+            {% endif %}
+            <div style="margin-left: auto;">
+                {% if view_only == None %}
+                <a href="{% url 'task' task.id %}" class="btn-sm btn-warning">View</a>
+                {% endif %}
+                <a href="{% url 'update_task' task.id %}" class="btn-sm btn-warning">Update</a>
+                <a href="{% url 'delete_task' task.id %}" class="btn-sm btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
